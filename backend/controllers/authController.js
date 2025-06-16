@@ -271,7 +271,7 @@ export const forgotPassword = async (req, res, next) => {
 
     await Otp.create({ email, otp, expiresAt });
 
-    const mailHtml = createOtpMailHtmlForForgetPassword({ fullName, otp });
+    const mailHtml = createOtpMailHtmlForForgetPassword({ fullName: user.fullName, otp });
     const mailSubject = "Your Password Reset OTP";
 
     await sendEmail(email, mailSubject, mailHtml);

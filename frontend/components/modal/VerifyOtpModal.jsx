@@ -34,7 +34,8 @@ const VerifyOtpModal = ({onClose, email}) => {
         <button className="absolute top-4 right-4 cursor-pointer" onClick={() => onClose()}>
           <RxCross2 size={20} />
         </button>
-        <h2 className="text-2xl font-bold text-center mb-6">Verify OTP</h2>
+        <h2 className="text-2xl font-bold text-center mb-2">Verify OTP</h2>
+        <p className="text-sm mb-5 px-3 text-blue-950">If you can't find the OTP, please check your spambox.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 font-medium">OTP</label>
