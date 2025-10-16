@@ -7,6 +7,7 @@ import modalReducer from "./slices/modalSlice";
 import reviewReducer from "./slices/reviewSlice";
 import subscriptionReducer from "./slices/subscriptionSlice";
 import brevoReducer from "./slices/blogSlice";
+import manualSubscriptionReducer from "./slices/manualSubscriptionSlice";
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     modal: modalReducer,
     reviewData: reviewReducer,
     subscriptionData: subscriptionReducer,
-    brevoSlice: brevoReducer
+    brevoSlice: brevoReducer,
+    manualSubscriptionSlice: manualSubscriptionReducer
   },
 })

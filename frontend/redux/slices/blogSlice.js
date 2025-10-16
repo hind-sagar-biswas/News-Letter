@@ -31,7 +31,7 @@ export const fetchSingleBlogs = createAsyncThunk("blog/fetchSingleBlogs", async 
     const response = await api.get(`/blog/${blogId}`, {
       headers: { "Content-Type": "application/json" },
     })
-    console.log(response);
+    // console.log(response);
     return response.data.data.blog;
   }catch(err){
     const message = err.response?.data?.message || "Something went wrong";
@@ -44,7 +44,7 @@ export const updateBlog = createAsyncThunk("blog/updateBlog", async (data, thunk
     const response = await api.put(`/blog/${data.id}`, data.formData, {
     headers: {"Content-type": "multipart/form-data"}
   })
-  console.log(response.data.data.blog);
+  // console.log(response.data.data.blog);
   return response.data.data.blog
   }catch(err){
     const message = err.response?.data?.message || "update blog failed";
@@ -57,7 +57,7 @@ export const deleteBlog = createAsyncThunk("blog/deleteBlog", async (blogId, thu
     const res = await api.delete(`/blog/${blogId}`, {
       headers: {"Content-Type": "application/json"}
     })
-    console.log(res);
+    // console.log(res);
     return blogId;
   }catch(err){
     const msg = err.response?.data?.message || "delete blog failed";

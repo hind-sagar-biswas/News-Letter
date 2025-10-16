@@ -1,6 +1,7 @@
 import express from "express";
 import protectRoute from "../middleware/protectRoute.js";
 import { getActiveSubscription, handleSuccess, handleWebHook, updatePackageWithCharge, subscribe, updatePackageForFree } from "../controllers/subscriptionController.js";
+import { manualSubscribe, manualUpdatePackageWithCharge } from "../controllers/manualSubscriptionController.js";
 ;
 
 const router = express.Router();
@@ -14,7 +15,9 @@ router.patch("/update-package/free/:subscriptionId", protectRoute, updatePackage
 router.post("/success", handleSuccess);
 router.post("/webhook", handleWebHook);
 
-
+// manual subscription (subscription without payment gateway, for temporary use)
+router.post("/manual/subscribe", protectRoute, manualSubscribe)
+router.post("/manual/update-package/with-charge/:subscriptionId", protectRoute, manualUpdatePackageWithCharge);
 
 
 

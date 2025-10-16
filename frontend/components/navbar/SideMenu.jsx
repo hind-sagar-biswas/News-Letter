@@ -1,9 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const SideMenu = ({ isMenuOpen, setIsMenuOpen }) => {
   const { user } = useSelector((state) => state.authData);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <>

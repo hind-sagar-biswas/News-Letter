@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
@@ -8,15 +9,20 @@ import {
   updatePackageForFree,
   updatePackageWithCharge,
 } from "@/redux/slices/subscriptionSlice";
+import { setSubscriptionData } from "@/redux/slices/manualSubscriptionSlice";
+import LoadingSpinner from "../helper/LoadingSpinner";
+
+
 
 const SubscriptionDataModal = ({ data: modalData, onClose }) => {
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const { _id, startingDate, endingDate, servicePlan, price } =
     modalData.activeSubscription || {};
   const clickedServicePrice = modalData.clickedServicePrice;
   const clickedServiceId = modalData.clickedServiceId;
-  console.log(clickedServicePrice)
+  // console.log(clickedServicePrice)
 
   const [loadingRenew, setLoadingRenew] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
@@ -25,19 +31,29 @@ const SubscriptionDataModal = ({ data: modalData, onClose }) => {
 
   const handleAddOneMonth = async () => {
     setLoadingRenew(true);
-    try {
-      const result = await dispatch(
-        subscribeUser({ price, servicePlanId: servicePlan._id })
-      ).unwrap();
+    dispatch(
+      setSubscriptionData({
+        requestType: "subscribe",
+        servicePlanId: servicePlan._id,
+        price,
+      })
+    );
+    router.push("/payment-options");
+    // setLoadingRenew(true);
+    // try {
+    //   const result = await dispatch(
+    //     subscribeUser({ price, servicePlanId: servicePlan._id })
+    //   ).unwrap();
 
-      if (result) {
-        window.location.replace(result); // result is the URL
-      }
-    } catch (err) {
-      toast.error(err || "Subscription failed");
-    } finally {
-      setLoadingRenew(false);
-    }
+    //   if (result) {
+    //     window.location.replace(result); // result is the URL
+    //   }
+    // } catch (err) {
+    //   toast.error(err || "Subscription failed");
+    // } finally {
+    //   setLoadingRenew(false);
+    // }
+    setLoadingRenew(false);
   };
 
   const handleUpdate = async () => {
@@ -51,23 +67,36 @@ const SubscriptionDataModal = ({ data: modalData, onClose }) => {
     try {
       if (newPrice === currentPrice || newPrice < currentPrice) {
         await dispatch(
-          updatePackageForFree({ subscriptionId, servicePlanId: newPlanId, price: newPrice })
-        ).unwrap();
-        toast.success("Package updated successfully for free.");
-        onClose()
-      } else {
-        const priceDifference = newPrice - currentPrice;
-        const result = await dispatch(
-          updatePackageWithCharge({
-            price: priceDifference,
-            servicePlanId: newPlanId,
+          updatePackageForFree({
             subscriptionId,
+            servicePlanId: newPlanId,
+            price: newPrice,
           })
         ).unwrap();
+        toast.success("Package updated successfully for free.");
+        onClose();
+      } else {
+        const priceDifference = newPrice - currentPrice;
+        dispatch(
+          setSubscriptionData({
+            requestType: "update",
+            servicePlanId: newPlanId,
+            price: priceDifference,
+            subscriptionId
+          })
+        );
+        router.push("/payment-options");
+        // const result = await dispatch(
+        //   updatePackageWithCharge({
+        //     price: priceDifference,
+        //     servicePlanId: newPlanId,
+        //     subscriptionId,
+        //   })
+        // ).unwrap();
 
-        if (result) {
-          window.location.replace(result);
-        }
+        // if (result) {
+        //   window.location.replace(result);
+        // }
       }
     } catch (err) {
       toast.error(err || "Update failed");
@@ -135,29 +164,7 @@ const SubscriptionDataModal = ({ data: modalData, onClose }) => {
             className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-semibold py-2 rounded-md hover:opacity-90 transition flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer"
           >
             {loadingRenew ? (
-              <>
-                <svg
-                  className="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                  />
-                </svg>
-                Processing...
-              </>
+              <LoadingSpinner message="Processing..." />
             ) : (
               "One month more"
             )}
@@ -170,29 +177,7 @@ const SubscriptionDataModal = ({ data: modalData, onClose }) => {
             className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-semibold py-2 rounded-md hover:opacity-90 transition flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer"
           >
             {loadingUpdate ? (
-              <>
-                <svg
-                  className="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                  />
-                </svg>
-                Processing...
-              </>
+              <LoadingSpinner message="Processing..." />
             ) : (
               "Update Package"
             )}

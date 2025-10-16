@@ -1,9 +1,11 @@
 "use client";
 
+import { useRouter } from 'next/navigation'
 import { openModal } from "@/redux/slices/modalSlice";
 import { subscribeUser } from "@/redux/slices/subscriptionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { setSubscriptionData } from '@/redux/slices/manualSubscriptionSlice';
 
 const PricingCard = ({
   _id,
@@ -14,6 +16,7 @@ const PricingCard = ({
   features,
   price,
 }) => {
+  const router = useRouter()
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.authData);
   const { data: activeSubscription, loading } = useSelector(
@@ -33,20 +36,22 @@ const PricingCard = ({
       );
     } else {
       // No subscription → create new subscription
-      try {
-        const resultAction = await dispatch(
-          subscribeUser({ price, servicePlanId: _id })
-        );
+      dispatch(setSubscriptionData({requestType: "subscribe", servicePlanId: _id, price}));
+      router.push("/payment-options");
+      // try {
+      //   const resultAction = await dispatch(
+      //     subscribeUser({ price, servicePlanId: _id })
+      //   );
 
-        if (subscribeUser.fulfilled.match(resultAction)) {
-          const paymentUrl = resultAction.payload;
-          window.location.href = paymentUrl;
-        } else {
-          toast.error(resultAction.payload || "Something went wrong.");
-        }
-      } catch (error) {
-        toast.error("Failed to subscribe.");
-      }
+      //   if (subscribeUser.fulfilled.match(resultAction)) {
+      //     const paymentUrl = resultAction.payload;
+      //     window.location.href = paymentUrl;
+      //   } else {
+      //     toast.error(resultAction.payload || "Something went wrong.");
+      //   }
+      // } catch (error) {
+      //   toast.error("Failed to subscribe.");
+      // }
     }
   };
 

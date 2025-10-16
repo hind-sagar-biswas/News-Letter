@@ -39,6 +39,9 @@ const subscriptionSchema = new mongoose.Schema(
       unique: true,
       sparse: true,
     },
+    transactionId: {
+      type: String
+    }
   },
   { timestamps: true }
 );

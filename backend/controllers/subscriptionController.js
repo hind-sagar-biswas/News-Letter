@@ -1,7 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import Subscription from "../models/subscriptionModel.js";
-import User from "../models/userModel.js";
 import sendEmail from "../utils/sendMail.js";
 import {
   createSubscriptionMailHtml,
@@ -77,8 +75,12 @@ export const subscribe = async (req, res) => {
       },
     };
 
+
     const response = await axios.request(options);
     const redirectUrl = response.data.payment_url;
+
+    // console.log("UddoktaPay response:", response.data);
+
 
     res.status(200).json({
       success: true,
@@ -173,7 +175,7 @@ export const updatePackageForFree = async (req, res) => {
     subscription.price = price;
     await subscription.save();
 
-    console.log(subscription)
+    // console.log(subscription)
 
     const mailHtml = createUpdateSubscriptionMailHtml({
       fullName: subscription.user.fullName,
@@ -194,6 +196,7 @@ export const updatePackageForFree = async (req, res) => {
 // HANDLE SUCCESS
 export const handleSuccess = async (req, res) => {
   const invoiceId = req.body.invoice_id;
+  // console.log("invoiceId", invoiceId);
 
   try {
     const options = {
@@ -214,6 +217,7 @@ export const handleSuccess = async (req, res) => {
     const subscriptionType = paymentData?.metadata?.type; // 'subscribe' or 'update'
     const subscribtionId = paymentData?.metadata?.subscriptionId;
 
+
     const subscription = await Subscription.findOne({ _id: subscribtionId });
 
     if (!subscription) {
@@ -224,6 +228,7 @@ export const handleSuccess = async (req, res) => {
     }
 
     if (subscriptionType === "subscribe") {
+      console.log("subscribe block")
       const updatedSubscription = await Subscription.findByIdAndUpdate(
         subscribtionId,
         { paid: true, invoiceId },
@@ -318,8 +323,8 @@ export const handleWebHook = async (req, res) => {
   const webhookData = req.body;
 
   // Handle the webhook data
-  console.log("Webhook Data Received:");
-  console.log(webhookData);
+  // console.log("Webhook Data Received:");
+  // console.log(webhookData);
 
   // You can now process the data as needed
 

@@ -19,6 +19,28 @@ export const fetchActiveSubscription = createAsyncThunk(
   }
 );
 
+export const subscribeUserManually = createAsyncThunk(
+  "subscription/subscribeManually",
+  async ({ price, servicePlanId, transactionId }, thunkAPI) => {
+    try {
+      const res = await api.post(
+        "/subscription/manual/subscribe",
+        { price, servicePlanId, transactionId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return res.data.url; // redirect URL
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Subscription failed"
+      );
+    }
+  }
+)
+
 export const subscribeUser = createAsyncThunk(
   "subscription/subscribe",
   async ({ price, servicePlanId }, thunkAPI) => {
@@ -40,6 +62,29 @@ export const subscribeUser = createAsyncThunk(
     }
   }
 );
+
+export const updatePackageWithChargeManually = createAsyncThunk(
+  "subscription/updateWithChargeManually",
+  async ({ price, servicePlanId, subscriptionId, transactionId }, thunkAPI) => {
+    try {
+      const res = await api.post(
+        `/subscription/manual/update-package/with-charge/${subscriptionId}`,
+        { price, servicePlanId, transactionId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res);
+      return res.data.url;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Update failed"
+      );
+    }
+  }
+)
 
 export const updatePackageWithCharge = createAsyncThunk(
   "subscription/updateWithCharge",
@@ -134,7 +179,19 @@ const subscriptionSlice = createSlice({
       })
       .addCase(updatePackageForFree.rejected, (state, action) => {
         state.error = action.payload;
-      });
+      })
+      .addCase(subscribeUserManually.fulfilled, (state, action) => {
+        state.redirectUrl = action.payload;
+      })
+      .addCase(subscribeUserManually.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(updatePackageWithChargeManually.fulfilled, (state, action) => {
+        state.redirectUrl = action.payload;
+      })
+      .addCase(updatePackageWithChargeManually.rejected, (state, action) => {
+        state.error = action.payload;
+      })
   },
 });
 

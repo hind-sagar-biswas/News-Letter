@@ -25,7 +25,7 @@ app.use(cors({
   credentials: true                
 }));
 
-console.log("url is ",process.env.FRONTEND_URL)
+console.log("frontend url is ",process.env.FRONTEND_URL)
 
 
 app.use(express.json());

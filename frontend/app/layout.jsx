@@ -48,13 +48,7 @@ export default function RootLayout({ children }) {
           className={`${dmSans.variable} ${roboto.variable} ${centuryGothic.variable} ${codeProBlackLC.variable} antialiased overflow-x-hidden`}
         >
           <ToastProvider />
-          <header>
-            <Navbar />
-          </header>
           {children}
-          <footer>
-            <Footer />
-          </footer>
         </body>
       </ReduxProvider>
     </html>

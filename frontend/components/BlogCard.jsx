@@ -9,9 +9,8 @@ const BlogCard = ({ _id, img, title, description }) => {
         <Image
           src={img}
           alt="blog image"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
+          fill
+          className="rounded-lg object-cover"
         />
       </div>
 
