@@ -6,7 +6,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getAllUsers = createAsyncThunk(
   "user/getAllUsers",
   async (page, thunkAPI) => {
-    console.log("page", page)
     try {
       const response = await api.get(`/user/all/all?page=${page}`);
       console.log(response.data)

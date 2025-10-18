@@ -70,14 +70,14 @@ export const manualSubscribe = async (req, res) => {
 
     await newSubscription.save();
 
-    const mailHtml = createSubscriptionMailHtml({
-      fullName: fullName,
-      startingDate: newSubscription.startingDate,
-      endingDate: newSubscription.endingDate,
-    });
-    const mailSubject = "Subscription Confirmed!";
+    // const mailHtml = createSubscriptionMailHtml({
+    //   fullName: fullName,
+    //   startingDate: newSubscription.startingDate,
+    //   endingDate: newSubscription.endingDate,
+    // });
+    // const mailSubject = "Subscription Confirmed!";
 
-    await sendEmail(email, mailSubject, mailHtml);
+    // await sendEmail(email, mailSubject, mailHtml);
 
     return res.status(200).json({
       success: true,
@@ -140,14 +140,14 @@ export const manualUpdatePackageWithCharge = async (req, res) => {
       { runValidators: false, new: true }
     );
 
-    const mailHtml = createUpdateSubscriptionMailHtml({
-      fullName: fullName,
-      startingDate: updatedSubscription.startingDate,
-      endingDate: updatedSubscription.endingDate,
-    });
-    const mailSubject = "Your Subscription Has Been Successfully Updated!";
+    // const mailHtml = createUpdateSubscriptionMailHtml({
+    //   fullName: fullName,
+    //   startingDate: updatedSubscription.startingDate,
+    //   endingDate: updatedSubscription.endingDate,
+    // });
+    // const mailSubject = "Your Subscription Has Been Successfully Updated!";
 
-    await sendEmail(email, mailSubject, mailHtml);
+    // await sendEmail(email, mailSubject, mailHtml);
 
     return res.status(200).json({
       success: true,
@@ -158,5 +158,79 @@ export const manualUpdatePackageWithCharge = async (req, res) => {
   } catch (error) {
     console.error("Success Handler Error:", error);
     res.status(500).send("Internal Server Error");
+  }
+};
+
+export const getManualSubscriptions = async (req, res) => {
+  try {
+    // Get current date
+    const currentDate = new Date();
+
+    // Pagination setup
+    const page = parseInt(req.query.page) || 1; // default: page 1
+    const limit = 15; // results per page
+    const skip = (page - 1) * limit;
+
+    // Query filter
+    const filter = {
+      endingDate: { $gt: currentDate },
+      paid: true,
+      invoiceId: { $regex: /^manual/i } // starts with "manual" (case-insensitive)
+    };
+
+    const subscriptions = await Subscription.find(filter)
+      .populate('servicePlan', 'title')
+      .sort({ endingDate: 1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Subscription.countDocuments(filter);
+
+    return res.status(200).json({
+      success: true,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalResults: total,
+      resultsPerPage: limit,
+      data: subscriptions,
+    });
+  } catch (error) {
+    console.error('Error fetching manual active subscriptions:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Server error while fetching manual active subscriptions',
+    });
+  }
+};
+
+export const updatePaidStatus = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Find subscription by ID and update the 'paid' field to false
+    const updatedSubscription = await Subscription.findByIdAndUpdate(
+      id,
+      { paid: false },
+      { new: true } // return the updated document
+    );
+
+    if (!updatedSubscription) {
+      return res.status(404).json({
+        success: false,
+        message: "Subscription not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Subscription payment status updated successfully",
+      data: updatedSubscription,
+    });
+  } catch (error) {
+    console.error("Update Paid Status Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update payment status",
+    });
   }
 };

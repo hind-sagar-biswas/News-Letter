@@ -13,6 +13,7 @@ import {
   getScholarTrackSubscribers,
   getCareerCatchSubscribers,
   getOptAllAccessSubscribers,
+  getUserById,
 } from "../controllers/userController.js";
 import { upload } from "../middleware/fileUpload.js";
 import adminProtect from "../middleware/adminProtect.js";
@@ -43,5 +44,7 @@ router.get("/subscribed/expired", adminProtect, getAllExpiredSubscribers);
 router.patch("/", protectRoute, upload.single("img"), updateProfile);
 router.put("/update-skills", protectRoute, updateSkills);
 router.put("/admin-access/:userId", adminProtect, updateAdminAccess);
+
+router.get("/user-all-data/:id", adminProtect, getUserById);
 
 export default router;

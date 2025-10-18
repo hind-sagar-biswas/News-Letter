@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { LayoutDashboard, FileText, MessageSquare } from "lucide-react";
+import { TbCurrencyTaka } from "react-icons/tb";
 import { FaUsers } from "react-icons/fa";
 
 export default function AdminLayout({ children }) {
@@ -42,6 +43,13 @@ export default function AdminLayout({ children }) {
           >
             <MessageSquare size={20} />
             Manage Reviews
+          </Link>
+          <Link
+            href="/admin/payments"
+            className="flex items-center gap-3 text-lg hover:text-amber-400 transition"
+          >
+            <TbCurrencyTaka size={20} />
+            Payments
           </Link>
         </nav>
       </aside>

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Subscription from "../models/subscriptionModel.js";
 import User from "../models/userModel.js";
 import CustomError from "../utils/customErrorClass.js";
@@ -54,14 +55,13 @@ export const getUserByEmail = async (req, res, next) => {
 };
 
 export const updateProfile = async (req, res, next) => {
-  console.log("request come")
   try {
     const { fullName } = req.body;
     if (!fullName) {
       return next(new CustomError(400, "full name is required"));
     }
 
-    console.log(req.user)
+    console.log(req.user);
 
     let imgUrl;
     if (req.file) {
@@ -158,10 +158,9 @@ export const updateSkills = async (req, res, next) => {
 export const updateAdminAccess = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    console.log(req.params);
+    // console.log(req.params);
 
     if (!userId || userId == "undefined") {
-      console.log("working");
       return next(new CustomError(404, "params is missing"));
     }
 
@@ -493,4 +492,38 @@ const getActiveSubscribersByPlanTitle = async (planTitle, page = 1) => {
     currentPage: page,
     users: allUsers,
   };
+};
+
+export const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid or missing user ID",
+      });
+    }
+
+    // Find user by ID
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: "error",
+      message: "Server error",
+    });
+  }
 };
