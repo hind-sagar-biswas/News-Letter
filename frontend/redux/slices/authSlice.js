@@ -26,6 +26,10 @@ export const verifyUser = createAsyncThunk(
       const response = await api.post("/auth/verify-user", data, {
         headers: { "Content-Type": "application/json" },
       }); // { email, otp }
+
+      const token = response.data.data.token;
+      localStorage.setItem('token', token);
+
       return response.data.data.user; // return full user after verification
     } catch (error) {
       const message =
@@ -42,10 +46,15 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (data, thunkAPI) => {
     try {
-      const response = await api.post("/auth/login", data, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await api.post("/auth/login", data);
+      
+      // Save token to localStorage
+      const token = response.data.data.token;
+      localStorage.setItem('token', token);
+      
+      // Return user data
       return response.data.data.user;
+
     } catch (error) {
       const message =
         error.response?.data?.message || error.message || "Login failed";
@@ -58,8 +67,10 @@ export const logoutUser = createAsyncThunk(
   "user/logout",
   async (_, thunkAPI) => {
     try {
-      const response = await api.post("/auth/logout");
-      return null;
+      // Remove token from localStorage
+      localStorage.removeItem('token');
+      
+      return null
     } catch (err) {
       const message =
         err.response?.data?.message || err.message || "Logout failed";
@@ -85,6 +96,27 @@ export const updatePassword = createAsyncThunk(
     }
   }
 );
+
+// export const checkAuth = createAsyncThunk(
+//   "user/checkAuth",
+//   async (_, thunkAPI) => {
+//     try {
+//       const token = localStorage.getItem('token');
+      
+//       if (!token) {
+//         return thunkAPI.rejectWithValue('No token found');
+//       }
+      
+//       // Optional: Verify token with backend
+//       const response = await api.get('/auth/me'); // Your "get current user" endpoint
+      
+//       return response.data.data.user;
+//     } catch (error) {
+//       localStorage.removeItem('token');
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const updateUserProfile = createAsyncThunk(
   "user/updateUser",
@@ -150,6 +182,10 @@ export const resetPassword = createAsyncThunk(
       const response = await api.post("/auth/reset-password", data, {
         headers: { "Content-Type": "application/json" },
       }); // { email, otp, newPassword, confirmPassword }
+
+      const token = response.data.data.token;
+      localStorage.setItem('token', token);
+
       return response.data.data.user;
     } catch (error) {
       const message =
@@ -169,6 +205,8 @@ export const deleteUser = createAsyncThunk(
         data: { password },
         headers: { "Content-Type": "application/json" },
       });
+
+      localStorage.removeItem('token');
 
       return null; // or just return null
     } catch (error) {

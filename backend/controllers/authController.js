@@ -1,7 +1,6 @@
 import otpGenerator from "otp-generator";
 import User from "../models/userModel.js";
 import CustomError from "../utils/customErrorClass.js";
-import generateTokenAndSetToken from "../utils/generateToken.js";
 import uploadToCloudinary from "../utils/uploadToCloudinary.js";
 import compareString from "../utils/conpareString.js";
 import Otp from "../models/otpModel.js";
@@ -14,6 +13,7 @@ import {
 import Subscription from "../models/subscriptionModel.js";
 import Review from "../models/reviewModel.js";
 import { deleteUserImageFromCloudinary } from "../utils/deleteFileFromCloudinary.js";
+import generateToken from "../utils/generateToken.js";
 
 export const signup = async (req, res, next) => {
   try {
@@ -131,7 +131,7 @@ export const verifyUser = async (req, res, next) => {
     await Otp.deleteMany({ email });
 
     // Set JWT token
-    generateTokenAndSetToken(user._id, res);
+    const token = generateToken(user._id);
 
     const mailHtml = createSignupMailHtml({ fullName: user.fullName });
     const mailSubject = "Welcome to Our Opt.national!";
@@ -147,6 +147,7 @@ export const verifyUser = async (req, res, next) => {
       message: "Account verified successfully.",
       data: {
         user: userResponse,
+        token
       },
     });
   } catch (err) {
@@ -176,7 +177,7 @@ export const login = async (req, res, next) => {
     }
 
     // Set JWT token in cookie
-    generateTokenAndSetToken(user._id, res);
+    const token = generateToken(user._id);
 
     // Prepare response
     const userResponse = user.toObject();
@@ -186,6 +187,7 @@ export const login = async (req, res, next) => {
       status: "success",
       data: {
         user: userResponse,
+        token
       },
     });
   } catch (err) {
@@ -345,7 +347,7 @@ export const resetPassword = async (req, res, next) => {
 
     await Otp.deleteMany({ email }); // Clean up all OTPs for the user
 
-    generateTokenAndSetToken(user._id, res); // Log the user in
+    const token = generateToken(user._id); // Log the user in
 
     const userResponse = user.toObject();
     delete userResponse.password;
@@ -354,6 +356,7 @@ export const resetPassword = async (req, res, next) => {
       status: "success",
       data: {
         user: userResponse,
+        token
       },
     });
   } catch (err) {
@@ -388,14 +391,6 @@ export const deleteUser = async (req, res, next) => {
 
     // Delete user's subscriptions
     await Subscription.deleteMany({ user: userId });
-
-    // Clear login cookie (logout)
-    res.cookie("jwt", "", {
-      maxAge: 0,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
-    });
 
     return res.status(200).json({
       status: "success",
