@@ -5,9 +5,9 @@ import Option from "./Option";
 const HomePage = () => {
   return (
     <>
-    <div className="relative w-[100vw] flex flex-col">
+    <div className="relative w-screen flex flex-col">
       <div className="w-full h-16 md:h-36">
-        <div className="flex justify-center w-full items-center absolute  top-[-4rem]">
+        <div className="flex justify-center w-full items-center absolute  -top-16">
           <Image
             src="/images/landingLogo.png"
             alt="homepage logo"
@@ -19,11 +19,11 @@ const HomePage = () => {
       <div className="w-full flex flex-col lg:flex-row px-6">
         <div className="w-full lg:w-[60vw]  ml-1 md:ml-20">
           <div className="flex flex-col xl:flex-row w-full mb-6">
-            <h1 className="text-3xl md:text-6xl w-full xl:w-1/2 font-semibold bg-gradient-to-b from-[#BF34CC] to-[#4015FF] bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-6xl w-full xl:w-1/2 font-semibold bg-linear-to-b from-[#BF34CC] to-[#4015FF] bg-clip-text text-transparent">
               THE ALL IN ONE OPPORTUNITY <br /> HUB
             </h1>
-            {/* <div className="flex-grow flex justify-start items-end">
-              <button className=" flex items-center gap-2 mt-5 bg-gradient-to-b from-[#292F6E] to-[#B400CF] rounded-2xl px-2 py-1.5 border-[1px] border-[#F6E8E8] shadow-[0px_4px_43.7px_-1px_rgba(255,255,255,0.25)] hover:shadow-[0_0_25px_rgba(180,0,207,0.5)] hover:scale-105 transition-all duration-300 font-roboto font-semibold cursor-pointer">
+            {/* <div className="grow flex justify-start items-end">
+              <button className=" flex items-center gap-2 mt-5 bg-linear-to-b from-[#292F6E] to-[#B400CF] rounded-2xl px-2 py-1.5 border border-[#F6E8E8] shadow-[0px_4px_43.7px_-1px_rgba(255,255,255,0.25)] hover:shadow-[0_0_25px_rgba(180,0,207,0.5)] hover:scale-105 transition-all duration-300 font-roboto font-semibold cursor-pointer">
                 <LogIn className="w-5 h-5" />
                 LOGIN
               </button>
@@ -50,7 +50,7 @@ const HomePage = () => {
           />
         </div>
       </div>
-      <BlurCircle top="top-[21rem]" left="left-[85%]" opacity="opacity-70" />
+      <BlurCircle top="top-84" left="left-[85%]" opacity="opacity-70" />
     </div>
     <Option />
     </>

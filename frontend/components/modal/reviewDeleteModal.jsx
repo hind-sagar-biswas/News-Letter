@@ -21,7 +21,7 @@ const DeleteReviewModal = ({ onClose, reviewId }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-      <div className="bg-gradient-to-br from-white/90 via-red-100 to-pink-100 border border-gray-200 w-full max-w-md mx-4 p-6 rounded-2xl relative text-black backdrop-blur shadow-lg">
+      <div className="bg-linear-to-br from-white/90 via-red-100 to-pink-100 border border-gray-200 w-full max-w-md mx-4 p-6 rounded-2xl relative text-black backdrop-blur shadow-lg">
         {/* Close Button */}
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black cursor-pointer"
@@ -46,7 +46,7 @@ const DeleteReviewModal = ({ onClose, reviewId }) => {
           <button
             onClick={() => handleDelete(reviewId)}
             disabled={loading}
-            className="px-6 py-2 bg-gradient-to-r from-red-500 via-pink-500 to-orange-400 text-white rounded-md font-semibold hover:opacity-90 transition cursor-pointer flex items-center justify-center gap-2 min-w-[130px]"
+            className="px-6 py-2 bg-linear-to-r from-red-500 via-pink-500 to-orange-400 text-white rounded-md font-semibold hover:opacity-90 transition cursor-pointer flex items-center justify-center gap-2 min-w-[130px]"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

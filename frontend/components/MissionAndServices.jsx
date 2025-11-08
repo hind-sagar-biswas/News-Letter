@@ -3,9 +3,9 @@ import OurServices from "./OurServices";
 const MissionAndVission = () => {
   return (
     <div>
-      <div className="relative z-0 w-[100vw] h-[25rem] md:h-[54vw] my-[30px] bg-[url('/images/happy-diverse-friends-background.png')] bg-no-repeat bg-cover bg-center">
+      <div className="relative z-0 w-screen h-100 md:h-[54vw] my-[30px] bg-[url('/images/happy-diverse-friends-background.png')] bg-no-repeat bg-cover bg-center">
         <div className="absolute left-[6vw] flex flex-col items-start sm:pt-12 lg:pt-14 xl:pt-50 max-w-full">
-          <h2 className="font-semibold md:font-bold text-2xl xxs:text-3xl  lg:text-7xl bg-gradient-to-r from-[#DF00AF] to-[#00B2FF] bg-clip-text text-transparent w-full xl:w-3/4">
+          <h2 className="font-semibold md:font-bold text-2xl xxs:text-3xl  lg:text-7xl bg-linear-to-r from-[#DF00AF] to-[#00B2FF] bg-clip-text text-transparent w-full xl:w-3/4">
             Our mission and vision
           </h2>
           <p className="text-xs md:text-base lg:text-xl md:font-sans mt-3 md:mt-4 lg:mt-7 w-[90vw] lg:pr-8 text-justify">

@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className="text-white px-4 sm:px-6 py-10 sm:py-16">
       {/* CTA Section */}
       <section className="max-w-6xl mx-auto text-center mb-8 sm:mb-10">
-        <h5 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-[#FF00E5] to-[#FF0022] bg-clip-text text-transparent">
+        <h5 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 bg-linear-to-r from-[#FF00E5] to-[#FF0022] bg-clip-text text-transparent">
           Ready to Unlock Your Future?
         </h5>
         <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto text-gray-300 mb-6 sm:mb-8">
@@ -41,7 +41,7 @@ const Footer = () => {
       {/* Social Section */}
       <section className="pt-6 sm:pt-8 max-w-6xl mx-auto">
         <div className="flex flex-col items-center mb-10">
-          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 text-center w-full before:content-[''] before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-white/50 before:to-transparent before:w-1/2 before:block before:mx-auto before:mb-4">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 text-center w-full before:content-[''] before:h-[2px] before:bg-linear-to-r before:from-transparent before:via-white/50 before:to-transparent before:w-1/2 before:block before:mx-auto before:mb-4">
             Join Our Community
           </h3>
 
@@ -60,7 +60,7 @@ const Footer = () => {
                 icon: (
                   <FaInstagram className="text-white w-6 sm:w-7 md:w-8 lg:w-10 h-6 sm:h-7 md:h-8 lg:h-10" />
                 ),
-                bg: "bg-gradient-to-tr from-[#FEDA75] to-[#D62976]",
+                bg: "bg-linear-to-tr from-[#FEDA75] to-[#D62976]",
                 shadow: "hover:shadow-[#D62976]/40",
               },
               {

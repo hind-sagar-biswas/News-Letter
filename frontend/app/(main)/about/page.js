@@ -4,11 +4,11 @@ export default function AboutUs() {
   return (
     <section className="relative text-white py-12">
 
-      <div className="absolute -top-24 left-0 -z-50 w-[100vw] h-[80vh] md:h-[66vw] bg-[url('/images/aboutpagebg1.png')] bg-no-repeat bg-contain" />
+      <div className="absolute -top-24 left-0 -z-50 w-screen h-[80vh] md:h-[66vw] bg-[url('/images/aboutpagebg1.png')] bg-no-repeat bg-contain" />
       <div className="absolute top-[50vh] -z-40 w-[120vw] h-full  md:h-[66vw] bg-[url('/images/aboutpagebg2.png')] bg-no-repeat bg-contain" />
 
-      <div className="w-full after:content-[''] after:h-[2px] after:bg-gradient-to-r after:from-transparent after:via-white/50 after:to-transparent after:w-3/5 after:block after:mx-auto after:mt-12">
-        <h2 className="text-4xl sm:text-5xl font-bold w-fit bg-gradient-to-r from-[#FF007B] to-[#FB00FF] bg-clip-text text-transparent mb-6 px-4 sm:px-14 lg:px-28">
+      <div className="w-full after:content-[''] after:h-[2px] after:bg-linear-to-r after:from-transparent after:via-white/50 after:to-transparent after:w-3/5 after:block after:mx-auto after:mt-12">
+        <h2 className="text-4xl sm:text-5xl font-bold w-fit bg-linear-to-r from-[#FF007B] to-[#FB00FF] bg-clip-text text-transparent mb-6 px-4 sm:px-14 lg:px-28">
           About Us
         </h2>
 
@@ -106,7 +106,7 @@ export default function AboutUs() {
             height={400}
             className="rounded-xl shadow-md"
           />
-          <div className="text-center w-fit px-0 lg:px-4 text-2xl sm:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">
+          <div className="text-center w-fit px-0 lg:px-4 text-2xl sm:text-5xl font-semibold text-transparent bg-clip-text bg-linear-to-r from-pink-500 to-blue-500">
             We are not just building a newsletter.
             <br />
             We are building a bridge between ambition and achievement.

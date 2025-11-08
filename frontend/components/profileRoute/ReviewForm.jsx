@@ -69,7 +69,7 @@ const ReviewForm = ({ subscriptionData }) => {
         <button
           onClick={handleSubmit}
           disabled={loading || !subscriptionData}
-          className={`bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-lg text-sm font-semibold text-white hover:opacity-90 transition flex items-center gap-2 cursor-pointer ${
+          className={`bg-linear-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-lg text-sm font-semibold text-white hover:opacity-90 transition flex items-center gap-2 cursor-pointer ${
             loading || !subscriptionData ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

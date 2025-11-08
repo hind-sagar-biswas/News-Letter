@@ -21,7 +21,7 @@ const DeleteBlogModal = ({ onClose, blogId }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-      <div className="bg-gradient-to-br from-white/90 via-blue-100 to-purple-100 border border-gray-200 w-full max-w-md mx-4 p-6 rounded-2xl relative text-black backdrop-blur shadow-lg">
+      <div className="bg-linear-to-br from-white/90 via-blue-100 to-purple-100 border border-gray-200 w-full max-w-md mx-4 p-6 rounded-2xl relative text-black backdrop-blur shadow-lg">
         {/* Close Button */}
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black cursor-pointer"
@@ -45,8 +45,8 @@ const DeleteBlogModal = ({ onClose, blogId }) => {
             onClick={handleDelete}
             className={`px-6 py-2 ${
               loading
-                ? "bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-red-500 via-pink-500 to-purple-500"
+                ? "bg-linear-to-r from-red-400 via-pink-400 to-purple-400 cursor-not-allowed"
+                : "bg-linear-to-r from-red-500 via-pink-500 to-purple-500"
             }  text-white rounded-md font-semibold hover:opacity-90 transition cursor-pointer`}
           >
             {loading ? (

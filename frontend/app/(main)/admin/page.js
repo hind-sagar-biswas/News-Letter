@@ -1,6 +1,6 @@
 export default function AdminHome() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1e2761] to-[#131c45] text-white p-6">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#1e2761] to-[#131c45] text-white p-6">
       <div className="text-center max-w-3xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fadeIn">
           Welcome to the <span className="text-amber-400">Admin Dashboard</span>

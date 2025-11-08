@@ -7,21 +7,21 @@ const Navbar = () => {
   return (
     <nav className=" relative z-20 lg:z-10">
       <BlurCircle
-        top="top-[-7.5rem]"
-        left="left-[-7.5rem]"
+        top="-top-30"
+        left="-left-30"
         className="hidden md:block"
       />
       <div className="mt-5 h-16">
         <div className="flex m-auto w-full md:w-[90%] h-7">
           {/* logo */}
-          <div className="flex-grow z-10">
+          <div className="grow z-10">
             <Link href="/">
               <Image
                 src="/images/navLogo.png"
                 alt="nav-image"
                 height={200}
                 width={120}
-                className="relative top-[-1.5rem] md:top-[-1rem] cursor-pointer"
+                className="relative -top-6 md:-top-4 cursor-pointer"
               />
             </Link>
           </div>

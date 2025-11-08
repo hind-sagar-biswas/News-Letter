@@ -22,14 +22,14 @@ const UserReviewPage = async () => {
       <div className="flex justify-start items-center gap-10 mb-12 mx-14">
         <Link
           href="/"
-          className="absolute z-20 hidden lg:inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+          className="absolute z-20 hidden lg:inline-block bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
         >
           ← Back
         </Link>
 
-        <h2 className="flex-grow text-center font-roboto font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-[#FF00FB] via-[#9B00FF] to-[#00D9FF] bg-clip-text text-transparent relative">
+        <h2 className="grow text-center font-roboto font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-linear-to-r from-[#FF00FB] via-[#9B00FF] to-[#00D9FF] bg-clip-text text-transparent relative">
           User Reviews
-          <span className="block h-1 w-24 mx-auto mt-2 bg-gradient-to-r from-[#FF00FB] via-[#9B00FF] to-[#00D9FF] rounded-full"></span>
+          <span className="block h-1 w-24 mx-auto mt-2 bg-linear-to-r from-[#FF00FB] via-[#9B00FF] to-[#00D9FF] rounded-full"></span>
         </h2>
       </div>
 
@@ -37,7 +37,7 @@ const UserReviewPage = async () => {
         {reviews.map((item, idx) => (
           <div
             key={idx}
-            className="px-4 py-6 w-full sm:w-[22rem] md:w-[24rem] lg:w-[26rem] shadow-lg hover:scale-[1.02] transition-transform duration-300"
+            className="px-4 py-6 w-full sm:w-88 md:w-[24rem] lg:w-104 shadow-lg hover:scale-[1.02] transition-transform duration-300"
           >
             <div className="relative w-full">
               <div className="absolute left-1/2 -translate-x-1/2 -top-9 rounded-full">

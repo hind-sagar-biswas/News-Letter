@@ -26,7 +26,7 @@ const BlogDetails = async ({ params }) => {
       <div className="mb-8">
         <Link
           href="/blogs"
-          className="inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+          className="inline-block bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
         >
           ← Back
         </Link>
@@ -47,7 +47,7 @@ const BlogDetails = async ({ params }) => {
       </div>
 
       {/* Title */}
-      <h1 className="mt-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold font-roboto bg-gradient-to-r from-[#FF00FB] via-[#9B00FF] to-[#00D9FF] bg-clip-text text-transparent">
+      <h1 className="mt-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold font-roboto bg-linear-to-r from-[#FF00FB] via-[#9B00FF] to-[#00D9FF] bg-clip-text text-transparent">
         {blog?.title}
       </h1>
 

@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 export default function SuccessPayment() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#43053c] via-[#070737] to-[#35023c] text-white">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-[#43053c] via-[#070737] to-[#35023c] text-white">
       <div className="max-w-xl w-full text-center bg-white/10 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-xl border border-white/10">
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-[#FF00E5] to-[#FF0022] text-transparent bg-clip-text">
+        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-linear-to-r from-[#FF00E5] to-[#FF0022] text-transparent bg-clip-text">
           🎉 Welcome to Opt National!
         </h1>
 
@@ -29,7 +29,7 @@ export default function SuccessPayment() {
         </p>
 
         <Link href="/" passHref>
-          <div className="inline-block bg-gradient-to-br from-[#292F6E] to-[#B400CF] hover:shadow-[0_0_25px_rgba(180,0,207,0.6)] border border-white/20 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 cursor-pointer">
+          <div className="inline-block bg-linear-to-br from-[#292F6E] to-[#B400CF] hover:shadow-[0_0_25px_rgba(180,0,207,0.6)] border border-white/20 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 cursor-pointer">
             Go to Homepage
           </div>
         </Link>

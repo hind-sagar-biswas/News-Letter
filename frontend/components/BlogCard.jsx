@@ -20,7 +20,7 @@ const BlogCard = ({ _id, img, title, description }) => {
       </h6>
 
       {/* Description & Button */}
-      <div className="font-roboto text-center flex flex-col items-center justify-between flex-grow">
+      <div className="font-roboto text-center flex flex-col items-center justify-between grow">
         <p className="text-sm px-4 h-[8em] overflow-hidden text-ellipsis line-clamp-5">
           {description}
         </p>

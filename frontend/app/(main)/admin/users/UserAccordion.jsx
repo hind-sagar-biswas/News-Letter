@@ -136,7 +136,7 @@ const UserAccordion = ({ userId }) => {
 const UserField = ({ label, value }) => (
   <div className="flex flex-col">
     <span className="text-gray-400 text-sm">{label}</span>
-    <span className="font-medium text-white break-words">{value || "-"}</span>
+    <span className="font-medium text-white wrap-break-word">{value || "-"}</span>
   </div>
 );
 

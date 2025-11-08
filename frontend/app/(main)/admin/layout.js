@@ -8,7 +8,7 @@ export default function AdminLayout({ children }) {
   return (
     <div className="relative z-20 min-h-screen flex flex-col lg:flex-row text-white">
       {/* Sidebar */}
-      <aside className="w-full lg:w-1/5 bg-gradient-to-b mb-3 lg:mr-3 from-[#1e2761] to-[#131c45] p-6 shadow-lg rounded-2xl">
+      <aside className="w-full lg:w-1/5 bg-linear-to-b mb-3 lg:mr-3 from-[#1e2761] to-[#131c45] p-6 shadow-lg rounded-2xl">
         <h2 className="text-2xl font-bold mb-6 text-white tracking-wide">
           Admin Panel
         </h2>

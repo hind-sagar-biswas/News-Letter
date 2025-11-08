@@ -105,7 +105,7 @@ const UpdateUserModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 overflow-y-auto">
-      <div className="bg-gradient-to-br from-white/90 via-blue-100 to-purple-100 w-full max-w-2xl rounded-2xl p-8 shadow-2xl relative text-black">
+      <div className="bg-linear-to-br from-white/90 via-blue-100 to-purple-100 w-full max-w-2xl rounded-2xl p-8 shadow-2xl relative text-black">
         <button
           onClick={onClose}
           className="absolute top-3 right-4 text-black text-xl font-bold hover:text-red-500"

@@ -27,7 +27,7 @@ const UddoktaPaySandbox = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-gray-50 to-gray-100">
       <div className="w-[500px] bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-200">

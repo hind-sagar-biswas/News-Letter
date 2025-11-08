@@ -27,7 +27,7 @@ const pricingData = [
   },
   {
     title: "OpT. All-Access",
-    titleColor: "text-transparent bg-clip-text bg-gradient-to-r from-[#FD0000] to-[#FFFFFF]",
+    titleColor: "text-transparent bg-clip-text bg-linear-to-r from-[#FD0000] to-[#FFFFFF]",
     focus: "Complete Package + Exclusive Content",
     idealFor: "Those who want full access to every opportunity",
     features: [

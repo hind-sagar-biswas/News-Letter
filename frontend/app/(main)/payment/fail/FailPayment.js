@@ -10,9 +10,9 @@ export default function FailPayment() {
   const tran_id = searchParams.get('tran_id')
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#191949] via-[#0c0c3a] to-[#3b0a43] text-white">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-[#191949] via-[#0c0c3a] to-[#3b0a43] text-white">
       <div className="max-w-xl w-full text-center bg-white/10 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-xl border border-white/10">
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-red-400 to-red-600 text-transparent bg-clip-text">
+        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-linear-to-r from-red-400 to-red-600 text-transparent bg-clip-text">
           ❌ Payment Failed
         </h1>
         <p className="text-lg sm:text-xl text-red-200 font-medium mb-2">
@@ -29,7 +29,7 @@ export default function FailPayment() {
         )}
 
         <Link href="/" passHref>
-          <div className="inline-block bg-gradient-to-br from-[#B400CF] to-[#FF0022] hover:shadow-[0_0_25px_rgba(180,0,207,0.5)] border border-white/20 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 cursor-pointer">
+          <div className="inline-block bg-linear-to-br from-[#B400CF] to-[#FF0022] hover:shadow-[0_0_25px_rgba(180,0,207,0.5)] border border-white/20 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 cursor-pointer">
             Return to Homepage
           </div>
         </Link>

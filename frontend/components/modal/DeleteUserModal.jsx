@@ -37,7 +37,7 @@ export default function DeleteUserModal({ onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-      <div className="bg-gradient-to-br from-white/90 via-red-100 to-pink-100 border border-gray-200 w-full max-w-md mx-4 p-6 rounded-2xl relative text-black backdrop-blur shadow-lg">
+      <div className="bg-linear-to-br from-white/90 via-red-100 to-pink-100 border border-gray-200 w-full max-w-md mx-4 p-6 rounded-2xl relative text-black backdrop-blur shadow-lg">
         {/* Close Button */}
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black cursor-pointer"
@@ -83,7 +83,7 @@ export default function DeleteUserModal({ onClose }) {
         <button
           onClick={handleDelete}
           disabled={loading}
-          className="w-full bg-gradient-to-r from-pink-500 via-red-600 to-pink-700 text-white font-semibold py-2 rounded-md hover:opacity-90 transition flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer"
+          className="w-full bg-linear-to-r from-pink-500 via-red-600 to-pink-700 text-white font-semibold py-2 rounded-md hover:opacity-90 transition flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer"
         >
           {loading ? (
             <>

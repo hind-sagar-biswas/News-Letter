@@ -3,9 +3,9 @@ import { Home } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-800 px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-800 px-4">
       {/* 404 Text */}
-      <h1 className="text-[100px] sm:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-600 drop-shadow-lg">
+      <h1 className="text-[100px] sm:text-[140px] font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-600 drop-shadow-lg">
         404
       </h1>
 

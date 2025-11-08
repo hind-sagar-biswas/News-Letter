@@ -75,7 +75,7 @@ const PricingCard = ({
           </p>
         </div>
 
-        <div className="md:mt-8 lg:mt-2 xl:mt-0 flex-grow group-hover:[&>h6]:animate-pulse sm:h-[18em] xl:h-[13em]">
+        <div className="md:mt-8 lg:mt-2 xl:mt-0 grow group-hover:[&>h6]:animate-pulse sm:h-[18em] xl:h-[13em]">
           <h6 className="text-xl mb-1 transition-all duration-300">
             What You Get:
           </h6>
@@ -90,12 +90,12 @@ const PricingCard = ({
       </div>
 
       <div className="my-2 flex flex-col justify-center items-center transition-all duration-500 rounded-b-2xl py-4 md:py-0 lg:py-4 h-52">
-        <p className="font-black font-codeProBlackLC text-2xl sm:text-4xl xl:leading-9 my-3 bg-gradient-to-b from-[#00FF11] to-[#FFFFFF] bg-clip-text text-transparent group-hover:animate-bounce">
+        <p className="font-black font-codeProBlackLC text-2xl sm:text-4xl xl:leading-9 my-3 bg-linear-to-b from-[#00FF11] to-[#FFFFFF] bg-clip-text text-transparent group-hover:animate-bounce">
           <span className="block">Tk. {price}/</span>month
         </p>
         <button
           disabled={loading}
-          className="font-codeProBlackLC font-black border-2 border-white/50 rounded-full text-xl sm:text-2xl md:text-3xl px-2 py-1 sm:px-4 sm:py-3 xl:px-10 xl:py-3 mb-2 xl:mb-4 bg-gradient-to-r from-[#D400B8] to-[#9900FF] hover:from-[#9900FF] hover:to-[#D400B8] hover:shadow-[0_0_15px_rgba(153,0,255,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
+          className="font-codeProBlackLC font-black border-2 border-white/50 rounded-full text-xl sm:text-2xl md:text-3xl px-2 py-1 sm:px-4 sm:py-3 xl:px-10 xl:py-3 mb-2 xl:mb-4 bg-linear-to-r from-[#D400B8] to-[#9900FF] hover:from-[#9900FF] hover:to-[#D400B8] hover:shadow-[0_0_15px_rgba(153,0,255,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
           onClick={() => subscribe()}
         >
           BUY NOW

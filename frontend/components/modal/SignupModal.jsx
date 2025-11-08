@@ -144,7 +144,7 @@ const SignupModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-      <div className="text-black bg-gradient-to-br from-white/90 via-blue-100 to-purple-100 border border-gray-200 w-full max-w-md rounded-2xl p-8 shadow-2xl relative backdrop-blur">
+      <div className="text-black bg-linear-to-br from-white/90 via-blue-100 to-purple-100 border border-gray-200 w-full max-w-md rounded-2xl p-8 shadow-2xl relative backdrop-blur">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -287,7 +287,7 @@ const SignupModal = ({ onClose }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold py-2 rounded-md hover:opacity-90 transition cursor-pointer flex items-center justify-center gap-2 disabled:opacity-70"
+            className="w-full bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold py-2 rounded-md hover:opacity-90 transition cursor-pointer flex items-center justify-center gap-2 disabled:opacity-70"
           >
             {loading ? (
               <>
