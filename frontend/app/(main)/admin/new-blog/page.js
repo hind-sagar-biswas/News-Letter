@@ -1,10 +1,13 @@
 "use client";
 import { createBlog } from "@/redux/slices/blogSlice";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import CSEditor from "@/components/CSEditor";
 
 const BlogForm = () => {
+  const editorRef = useRef(null);
+
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.blogData);
 
@@ -23,20 +26,46 @@ const BlogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ image, title, description });
+
+    // Get CKEditor data
+    const content = editorRef.current?.getData() || "";
+    console.log(content);
+
+    if (!content.trim()) {
+      toast.error("Body cannot be empty.");
+      return;
+    }
+
+    if (!image) {
+      toast.error("Please upload an image.");
+      return;
+    }
+
+    if (!title) {
+      toast.error("Please enter a title.");
+      return;
+    }
+
+    if (!description) {
+      toast.error("Please enter a description.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("body", content);
     formData.append("img", image);
 
     try {
       await dispatch(createBlog(formData)).unwrap();
-      toast.success("New Blog created");
+      toast.success("New Blog created!");
+
       setImage(null);
       setPreview(null);
       setTitle("");
       setDescription("");
+      editorRef.current?.setData(""); // Reset CKEditor
     } catch (err) {
       toast.error(err || "Blog creation failed.");
     }
@@ -46,7 +75,7 @@ const BlogForm = () => {
     <div className="min-h-screen bg-gray-950 rounded-2xl text-white flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900 p-8 rounded-2xl shadow-lg max-w-lg w-full space-y-6 border border-white/10"
+        className="bg-gray-900 p-8 rounded-2xl shadow-lg max-w-7xl w-full space-y-6 border border-white/10"
       >
         <h2 className="text-2xl font-bold text-center text-red-400">
           Submit a New Blog
@@ -60,7 +89,7 @@ const BlogForm = () => {
             required
             accept="image/*"
             onChange={handleImageChange}
-            className="w-full bg-gray-800 text-sm p-2 rounded-lg border border-white/20 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-500 file:text-white file:cursor-pointer hover:file:bg-red-600 cursor-pointer"
+            className="w-full bg-gray-800 text-sm p-2 rounded-lg border border-white/20 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-500 file:text-white hover:file:bg-red-600 cursor-pointer"
           />
           {preview && (
             <img
@@ -71,71 +100,53 @@ const BlogForm = () => {
           )}
         </div>
 
-        {/* Title Input */}
+        {/* Title */}
         <div>
           <label className="block mb-2 text-sm font-semibold">Title</label>
           <input
             type="text"
             value={title}
+            required
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter blog title"
             className="w-full p-3 rounded-lg bg-gray-800 border border-white/20 placeholder-gray-400"
-            required
           />
         </div>
 
-        {/* Description Input */}
+        {/* Description */}
         <div>
-          <label className="block mb-2 text-sm font-semibold">
-            Description
-          </label>
+          <label className="block mb-2 text-sm font-semibold">Description</label>
           <textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Write your blog description..."
-            rows={5}
-            className="w-full p-3 rounded-lg bg-gray-800 border border-white/20 placeholder-gray-400"
             required
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Enter blog description"
+            className="w-full p-3 rounded-lg bg-gray-800 border border-white/20 placeholder-gray-400"
           />
+        </div>
+
+        {/* CKEditor */}
+        <div>
+          <label className="block mb-2 text-sm font-semibold">Body</label>
+          <article className="prose lg:prose-xl !max-w-none prose-invert">
+            <CSEditor
+              onReady={(editor) => {
+                editorRef.current = editor;
+              }}
+            />
+          </article>
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
-          className={`w-full py-3 rounded-lg font-semibold transition cursor-pointer ${
-            loading
-              ? "bg-red-400 cursor-not-allowed"
-              : "bg-red-500 hover:bg-red-600"
-          }`}
+          className={`w-full py-3 rounded-lg font-semibold transition ${loading
+            ? "bg-red-400 cursor-not-allowed"
+            : "bg-red-500 hover:bg-red-600"
+            }`}
         >
-          {loading ? (
-            <div className="flex items-center justify-center gap-2">
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                ></path>
-              </svg>
-              Submitting...
-            </div>
-          ) : (
-            "Submit Blog"
-          )}
+          {loading ? "Submitting..." : "Submit Blog"}
         </button>
       </form>
     </div>
@@ -143,3 +154,4 @@ const BlogForm = () => {
 };
 
 export default BlogForm;
+

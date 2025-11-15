@@ -7,7 +7,9 @@ export default function MainLayout({ children }) {
       <header>
         <Navbar />
       </header>
-      {children}
+      <main className="max-w-7xl mx-auto">{/* min-h-screen to ensure footer at bottom */}
+        {children}
+      </main>
       <footer>
         <Footer />
       </footer>

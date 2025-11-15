@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getServerAxios } from "@/lib/server-axios";
+import 'ckeditor5/ckeditor5.css';
+import '@/app/ck.css';
 
 const BlogDetails = async ({ params }) => {
   const { id } = await params;
@@ -52,10 +54,8 @@ const BlogDetails = async ({ params }) => {
       </h1>
 
       {/* Description */}
-      <div className="mt-6">
-        <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed font-roboto">
-          {blog?.description}
-        </p>
+      <div className="mt-6 ck-content">
+        <div className="prose lg:prose-xl !max-w-none prose-invert" dangerouslySetInnerHTML={{ __html: blog?.body }} />
       </div>
     </div>
   );

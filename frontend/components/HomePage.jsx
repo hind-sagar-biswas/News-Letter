@@ -5,7 +5,7 @@ import Option from "./Option";
 const HomePage = () => {
   return (
     <>
-    <div className="relative w-screen flex flex-col">
+    <div className="relative flex flex-col">
       <div className="w-full h-16 md:h-36">
         <div className="flex justify-center w-full items-center absolute  -top-16">
           <Image

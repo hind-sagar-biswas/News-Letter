@@ -7,10 +7,10 @@ import uploadToCloudinary from "../utils/uploadToCloudinary.js";
 // Create a new blog
 export const createBlog = async (req, res, next) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, body } = req.body;
 
-    if (!title || !description) {
-      return next(new CustomError(400, "title and description are required"));
+    if (!title || !description || !body) {
+      return next(new CustomError(400, "title, description and body are required"));
     }
 
     if (!req.file) {
@@ -23,6 +23,7 @@ export const createBlog = async (req, res, next) => {
     const blog = await Blog.create({
       title,
       description,
+      body,
       img: result.secure_url,
     });
 
