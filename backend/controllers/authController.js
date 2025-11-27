@@ -131,7 +131,7 @@ export const verifyUser = async (req, res, next) => {
     await Otp.deleteMany({ email });
 
     // Set JWT token
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     const mailHtml = createSignupMailHtml({ fullName: user.fullName });
     const mailSubject = "Welcome to Our Opt.national!";
@@ -177,7 +177,7 @@ export const login = async (req, res, next) => {
     }
 
     // Set JWT token in cookie
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     // Prepare response
     const userResponse = user.toObject();
@@ -347,7 +347,7 @@ export const resetPassword = async (req, res, next) => {
 
     await Otp.deleteMany({ email }); // Clean up all OTPs for the user
 
-    const token = generateToken(user._id); // Log the user in
+    const token = await generateToken(user._id); // Log the user in
 
     const userResponse = user.toObject();
     delete userResponse.password;
