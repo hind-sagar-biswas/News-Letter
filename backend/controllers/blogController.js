@@ -90,10 +90,11 @@ export const updateBlog = async (req, res, next) => {
       return next(new CustomError(404, "Blog not found"));
     }
 
-    const { title, description } = req.body;
+    const { title, description, body } = req.body;
 
     if (title !== undefined) blog.title = title;
     if (description !== undefined) blog.description = description;
+    if (body !== undefined) blog.body = body;
 
     if (req.file) {
       // Upload new image to Cloudinary
