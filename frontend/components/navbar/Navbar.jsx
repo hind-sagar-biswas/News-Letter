@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className=" relative z-20 lg:z-10">
+    <nav className=" relative z-20 lg:z-100">
       <BlurCircle
         top="-top-30"
         left="-left-30"
