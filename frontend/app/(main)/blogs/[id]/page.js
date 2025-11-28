@@ -36,16 +36,15 @@ const BlogDetails = async ({ params }) => {
 
       {/* Image Section */}
       <div className="w-full flex flex-col lg:flex-row">
-        <div className="w-full lg:w-1/2">
+        <div className="w-full">
           <Image
             src={blog?.img || "/images/default-blog.jpg"}
             alt={blog?.title}
-            width={800}
+            width={1200}
             height={500}
-            className="rounded-xl shadow-xl object-cover w-full max-h-[600px]"
+            className="rounded-xl object-cover w-full aspect-4/1"
           />
         </div>
-        <div className="hidden lg:block lg:w-1/2" />
       </div>
 
       {/* Title */}

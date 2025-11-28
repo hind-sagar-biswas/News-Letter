@@ -48,16 +48,16 @@ const BlogPage = async () => {
                 alt="blog image"
                 layout="fill"
                 objectFit="cover"
-                className="rounded-t-xl"
+                className="rounded-t-xl aspect-4/1"
               />
             </div>
 
             {/* Content */}
             <div className="flex flex-col justify-between items-center text-center p-4">
-              <h6 className="text-lg font-semibold font-roboto mb-2 h-[3em] overflow-hidden line-clamp-2">
+              <h6 className="text-lg font-semibold font-roboto mb-2 overflow-hidden line-clamp-2">
                 {item?.title}
               </h6>
-              <p className="text-sm text-gray-200 h-[7.5em] overflow-hidden line-clamp-5 mb-4 px-2">
+              <p className="text-sm text-gray-200 h-[6em] overflow-hidden line-clamp-4 mb-4 px-2 opacity-60">
                 {item?.description}
               </p>
 
