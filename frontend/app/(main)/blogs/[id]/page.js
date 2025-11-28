@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getServerAxios } from "@/lib/server-axios";
+import LatestBlogs from "@/components/LatestBlogs";
 import 'ckeditor5/ckeditor5.css';
 import '@/app/ck.css';
 
@@ -11,10 +12,16 @@ const BlogDetails = async ({ params }) => {
   const axios = await getServerAxios();
 
   let blog = null;
+  let latestBlogs = null;
 
   try {
+    // Fetch current blog
     const response = await axios.get(`/blog/${id}`);
     blog = response.data.data.blog;
+
+    // Fetch latest 5 blogs excluding current blog (efficient server-side filtering)
+    const latestBlogsResponse = await axios.get(`/blog/${id}/latest?limit=5`);
+    latestBlogs = latestBlogsResponse.data.data.blogs;
   } catch (err) {
     console.error("Error fetching blog:", err);
     notFound();
@@ -56,6 +63,9 @@ const BlogDetails = async ({ params }) => {
       <div className="mt-6 ck-content">
         <div className="prose lg:prose-xl !max-w-none prose-invert" dangerouslySetInnerHTML={{ __html: blog?.body }} />
       </div>
+
+      {/* Latest Blogs Section */}
+      <LatestBlogs blogs={latestBlogs} />
     </div>
   );
 };

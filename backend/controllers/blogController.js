@@ -138,3 +138,26 @@ export const deleteBlog = async (req, res, next) => {
     next(err);
   }
 };
+
+// Get latest blogs excluding specific blog ID
+export const getLatestBlogsExcludingId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const limit = parseInt(req.query.limit) || 5;
+
+    // Find latest blogs excluding the specified ID
+    const blogs = await Blog.find({ _id: { $ne: id } })
+      .sort({ createdAt: -1 })
+      .limit(limit);
+
+    res.status(200).json({
+      status: "success",
+      results: blogs.length,
+      data: {
+        blogs,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
